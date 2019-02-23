@@ -1,6 +1,7 @@
 <?php
 if(!isset($_COOKIE["logged"])) {
-  echo "cookie set";
+  header('Location: /php/login.php');
+  echo "cookie is not set";
 }
 if( $_COOKIE["logged"] == "true") {
   //they can continue
@@ -61,7 +62,7 @@ $conn->close();
   <div id="topbar-responsive" class="topbar-responsive-links">
     <div class="top-bar-right">
       <ul class="menu simple vertical medium-horizontal">
-        <li><a href="/php/login.php/?loggedout=true" class="logout_button">Log out</a></li>
+        <li><a href="/php/login.php/" class="logout_button" onclick="logout();">Log out</a></li>
         <li>
           <button type="button" class="button hollow topbar-responsive-button">Edit Content</button>
         </li>
@@ -144,3 +145,9 @@ if ($result->num_rows > 0) {
 }
 $conn->close();
 ?>
+
+<script>
+function logout(){
+  document.cookie = "logged=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;";
+}
+</script>
